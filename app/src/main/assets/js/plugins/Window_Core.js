@@ -25,18 +25,17 @@
 	};
 	Window_Base.prototype.processCharacter = function(textState) {
 		this.文字速度缓冲 = this.文字速度缓冲 +0.1;
-		if(this.文字速度缓冲>0.3){
-			this.文字速度缓冲 = 0;
-			const c = textState.text[textState.index++];
-		
-            if (c.charCodeAt(0) < 0x20) {
-                this.flushTextState(textState);
-                this.processControlCharacter(textState, c);
-            } else {
-                textState.buffer += c;
-            }
+		if(this.文字速度缓冲 < 0.3){
+			return;
 		}
-        
+		this.文字速度缓冲 = 0;
+        const c = textState.text[textState.index++];
+        if (c.charCodeAt(0) < 0x20) {
+            this.flushTextState(textState);
+            this.processControlCharacter(textState, c);
+        } else {
+            textState.buffer += c;
+        }
     };
 	
 	const _Window_Scrollable_prototype_updateArrows = Window_Scrollable.prototype.updateArrows;
@@ -120,4 +119,4 @@ function 幸运值倍率(值, luk){
 	if(luk > 9990){
 		使用者攻击力 = 使用者攻击力 * 10;
 	}
-}
+};

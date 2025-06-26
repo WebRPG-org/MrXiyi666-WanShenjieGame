@@ -37,6 +37,14 @@
 			const classId = this._enemy._classId;
 			_Data_zero = _Data_zero + "-" + $dataClasses[classId].name;		
 		}
+		console.log(_Data_zero);
+		let result = "";
+        for (const char of _Data_zero) {
+            result += char;
+            if (char === "兽") break;
+        }
+        _Data_zero = result;
+		console.log(_Data_zero);
 		this.drawText(_Data_zero, 0, 0, this.width, "center");
 		this.contents.fillRect(110, 35, (this.width-145) * (this._enemy.hp/this._enemy.mhp), 35, "rgba(255, 0, 0, 1)");
 		this.drawText("生命值：" + this._enemy.hp + " : " + this._enemy.mhp, 10, 35, this.width, "left");
